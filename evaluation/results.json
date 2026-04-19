@@ -1,0 +1,132 @@
+{
+  "recall_at_k": 5,
+  "recall": 1.0,
+  "details": [
+    {
+      "query": "What method is used to predict protein-ligand binding affinity?",
+      "modality": "text",
+      "expected_keywords": [
+        "drug",
+        "binding",
+        "protein",
+        "affinity"
+      ],
+      "hit": true,
+      "top_retrieved": [
+        "1711.10540v2",
+        "1711.10540v2",
+        "1711.10540v2"
+      ],
+      "top_scores": [
+        18.904,
+        18.6016,
+        18.4611
+      ]
+    },
+    {
+      "query": "What does the table of docking scores show across candidate compounds?",
+      "modality": "table",
+      "expected_keywords": [
+        "drug",
+        "binding",
+        "docking",
+        "compound"
+      ],
+      "hit": true,
+      "top_retrieved": [
+        "1711.10540v2",
+        "1711.10540v2",
+        "1711.10540v2"
+      ],
+      "top_scores": [
+        11.5479,
+        11.2428,
+        11.1603
+      ]
+    },
+    {
+      "query": "Describe the trend shown in the binding affinity plot.",
+      "modality": "figure",
+      "expected_keywords": [
+        "binding",
+        "affinity",
+        "protein",
+        "drug"
+      ],
+      "hit": true,
+      "top_retrieved": [
+        "1711.10540v2",
+        "1711.10540v2",
+        "1711.10540v2"
+      ],
+      "top_scores": [
+        14.992,
+        14.4135,
+        14.1191
+      ]
+    },
+    {
+      "query": "What drug target is identified as most promising in the study?",
+      "modality": "text",
+      "expected_keywords": [
+        "drug",
+        "target",
+        "protein",
+        "discovery"
+      ],
+      "hit": true,
+      "top_retrieved": [
+        "1711.10540v2",
+        "1711.10540v2",
+        "1711.10540v2"
+      ],
+      "top_scores": [
+        10.9638,
+        10.3991,
+        10.243
+      ]
+    },
+    {
+      "query": "Which compounds show the highest selectivity in the dataset?",
+      "modality": "table",
+      "expected_keywords": [
+        "drug",
+        "compound",
+        "selectivity",
+        "binding"
+      ],
+      "hit": true,
+      "top_retrieved": [
+        "1711.10540v2",
+        "1711.10540v2",
+        "1711.10540v2"
+      ],
+      "top_scores": [
+        11.2011,
+        11.1933,
+        10.9715
+      ]
+    },
+    {
+      "query": "What does the 3D structure visualization of the protein active site show?",
+      "modality": "figure",
+      "expected_keywords": [
+        "protein",
+        "structure",
+        "active",
+        "drug"
+      ],
+      "hit": true,
+      "top_retrieved": [
+        "1711.10540v2",
+        "1711.10540v2",
+        "1711.10540v2"
+      ],
+      "top_scores": [
+        14.167,
+        12.8628,
+        12.1112
+      ]
+    }
+  ]
+}

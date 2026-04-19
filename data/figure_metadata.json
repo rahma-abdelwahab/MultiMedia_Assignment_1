@@ -1,0 +1,114 @@
+[
+  {
+    "fig_id": "1711.10540v2_p003_fig01",
+    "paper_id": "1711.10540v2",
+    "page_number": 3,
+    "type": "figure",
+    "image_path": "data/figure_images\\1711.10540v2_p003_fig01.jpg",
+    "bbox": [
+      62.02400207519531,
+      625.02001953125,
+      550.1000366210938,
+      718.6959838867188
+    ],
+    "caption": ""
+  },
+  {
+    "fig_id": "1711.10540v2_p004_fig01",
+    "paper_id": "1711.10540v2",
+    "page_number": 4,
+    "type": "figure",
+    "image_path": "data/figure_images\\1711.10540v2_p004_fig01.jpg",
+    "bbox": [
+      62.02400207519531,
+      62.0,
+      550.0999755859375,
+      125.58001708984375
+    ],
+    "caption": ""
+  },
+  {
+    "fig_id": "1711.10540v2_p004_fig02",
+    "paper_id": "1711.10540v2",
+    "page_number": 4,
+    "type": "figure",
+    "image_path": "data/figure_images\\1711.10540v2_p004_fig02.jpg",
+    "bbox": [
+      62.02400207519531,
+      287.8900146484375,
+      550.0999755859375,
+      366.3299865722656
+    ],
+    "caption": ""
+  },
+  {
+    "fig_id": "1711.10540v2_p003_tbl01",
+    "paper_id": "1711.10540v2",
+    "page_number": 3,
+    "type": "table",
+    "image_path": "data/figure_images\\1711.10540v2_p003_tbl01.jpg",
+    "bbox": [
+      72.024,
+      635.02,
+      540.0952,
+      707.3559999999999
+    ],
+    "caption": " | In order to investigate the accuracy of PPA-Pred2, we evaluated its performance on the selected |  | \ndataset. For this purpose, we accessed PPA-Pred2 through its webserver (URL: |  |  | \nhttp://www.iitm.ac.in/bioinfo/PPA_Pred/) on 03-02-2017 |  | (Yugandhar and Gromiha, 2014) | . This\nwebserver takes amino acid sequences of ligand and receptor of a protein complex and returns |  |  | \npredicte"
+  },
+  {
+    "fig_id": "1711.10540v2_p003_tbl02",
+    "paper_id": "1711.10540v2",
+    "page_number": 3,
+    "type": "table",
+    "image_path": "data/figure_images\\1711.10540v2_p003_tbl02.jpg",
+    "bbox": [
+      347.23,
+      697.9559999999999,
+      361.99,
+      707.3559999999999
+    ],
+    "caption": "\u2206 | \ud835\udc3a"
+  },
+  {
+    "fig_id": "1711.10540v2_p003_tbl03",
+    "paper_id": "1711.10540v2",
+    "page_number": 3,
+    "type": "table",
+    "image_path": "data/figure_images\\1711.10540v2_p003_tbl03.jpg",
+    "bbox": [
+      522.46,
+      697.9559999999999,
+      535.72,
+      707.3559999999999
+    ],
+    "caption": "\ud835\udc3e | \n | \ud835\udc51"
+  },
+  {
+    "fig_id": "1711.10540v2_p004_tbl01",
+    "paper_id": "1711.10540v2",
+    "page_number": 4,
+    "type": "table",
+    "image_path": "data/figure_images\\1711.10540v2_p004_tbl01.jpg",
+    "bbox": [
+      72.024,
+      72.0,
+      540.0964,
+      115.58000000000004
+    ],
+    "caption": " | . The results obtained through this evaluation will also serve as\nbaseline in this study. The predicted values obtained from the server are available as supplementary | \nfile (see \u201cSupplementary Information\u201d). | "
+  },
+  {
+    "fig_id": "1711.10540v2_p004_tbl02",
+    "paper_id": "1711.10540v2",
+    "page_number": 4,
+    "type": "table",
+    "image_path": "data/figure_images\\1711.10540v2_p004_tbl02.jpg",
+    "bbox": [
+      72.024,
+      297.89,
+      540.0964,
+      356.33
+    ],
+    "caption": " | We have developed a sequence-only regression model called ISLAND (In SiLico protein |  | \nAffiNity preDictor), for protein binding affinity prediction. To develop ISLAND, we have used |  |  | \ndifferent regression |  | methods | , evaluation protocols, and sequence-based feature extraction\ntechniques. The methodology adopted for the development of ISLAND is detailed below. |  |  | "
+  }
+]

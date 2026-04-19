@@ -1,0 +1,8 @@
+{
+  "1711.10540v2": {
+    "category": "drug_discovery",
+    "query": "cat:q-bio.BM protein structure drug target binding affinity",
+    "title": "ISLAND: In-Silico Prediction of Proteins Binding Affinity Using Sequence Descriptors",
+    "filename": "1711.10540v2.pdf"
+  }
+}
