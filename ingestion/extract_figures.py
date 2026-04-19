@@ -16,27 +16,66 @@ FIG_META    = "data/figure_metadata.json"
 os.makedirs(FIG_DIR, exist_ok=True)
 
 def _extract_visuals_pymupdf(doc, paper_id, page_idx, dpi=300):
-    """Extract real embedded figures and mathematical equations."""
+    """Extract embedded images, math, AND vector figures via caption heuristics."""
     page     = doc[page_idx]
     page_num = page_idx + 1
-    mat      = fitz.Matrix(dpi / 72, dpi / 72)
+    mat      = fitz.Matrix(dpi / 72, dpi / 72) #control img quality 
     crops    = []
 
-    # ==========================================
-    # 1. EXTRACT EMBEDDED FIGURES & CHARTS
-    # ==========================================
-    # get_image_info grabs actual images/plots embedded in the PDF (much safer than get_drawings)
+    # EXTRACT FIGURES USING CAPTION (e.g. "Figure 1")
+    blocks = page.get_text("blocks")
+    fig_idx = 0
+    
+    for b in blocks:
+        # b is (x0, y0, x1, y1, text, block_no, block_type)
+        if b[6] != 0: 
+            continue  # Skip non-text blocks
+        
+        text = b[4].strip()
+        # check if text looks like a figure caption
+        if text.startswith("Figure ") or text.startswith("Fig."):
+            caption_bbox = fitz.Rect(b[:4])
+
+            fig_top = max(0, caption_bbox.y0 - 300)
+            
+            padded = fitz.Rect(
+                max(0, caption_bbox.x0 - 20),
+                fig_top,
+                min(page.rect.width, caption_bbox.x1 + 150), # Widen to catch full width
+                caption_bbox.y0 - 5 
+            )
+            
+            # Skip if the estimated box is too tiny
+            if padded.width < 50 or padded.height < 50:
+                continue
+
+            fig_idx += 1
+            fig_id = f"{paper_id}_p{page_num:03d}_vecfig{fig_idx:02d}"
+            img_path = os.path.join(FIG_DIR, f"{fig_id}.jpg")
+
+            clip = page.get_pixmap(matrix=mat, clip=padded, colorspace=fitz.csRGB)
+            clip.save(img_path)
+
+            crops.append({
+                "fig_id":      fig_id,
+                "paper_id":    paper_id,
+                "page_number": page_num,
+                "type":        "figure",
+                "image_path":  img_path,
+                "bbox":        [padded.x0, padded.y0, padded.x1, padded.y1],
+                "caption":     text[:400], 
+            })
+
+    # EXTRACT EMBEDDED IMAGES 
     images = page.get_image_info(xrefs=True)
     
     for img_idx, img in enumerate(images):
         bbox = fitz.Rect(img["bbox"])
-        w, h = bbox.width, bbox.height
         
         # Filter out tiny logos, noise, or 1x1 pixel artifacts
-        if w * h < 4000:
+        if bbox.width * bbox.height < 4000:
             continue
 
-        # Add generous padding to capture axes labels and context
         padded = fitz.Rect(
             max(0, bbox.x0 - 20),
             max(0, bbox.y0 - 20),
@@ -44,7 +83,8 @@ def _extract_visuals_pymupdf(doc, paper_id, page_idx, dpi=300):
             min(page.rect.height, bbox.y1 + 20),
         )
 
-        fig_id   = f"{paper_id}_p{page_num:03d}_fig{img_idx+1:02d}"
+        fig_idx += 1
+        fig_id   = f"{paper_id}_p{page_num:03d}_raster{fig_idx:02d}"
         img_path = os.path.join(FIG_DIR, f"{fig_id}.jpg")
 
         clip = page.get_pixmap(matrix=mat, clip=padded, colorspace=fitz.csRGB)
@@ -60,10 +100,7 @@ def _extract_visuals_pymupdf(doc, paper_id, page_idx, dpi=300):
             "caption":     "", 
         })
 
-    # ==========================================
-    # 2. EXTRACT MATHEMATICAL EQUATIONS
-    # ==========================================
-    blocks = page.get_text("blocks")
+    # 3. EXTRACT MATHEMATICAL EQUATIONS
     math_idx = 0
     math_symbols = ['∑', '∫', '≈', '±', '≤', '≥', '∝', '∂', 'Δ', 'θ', 'λ', 'μ', 'π', 'σ', 'ω', '=']
     
@@ -75,17 +112,16 @@ def _extract_visuals_pymupdf(doc, paper_id, page_idx, dpi=300):
         text = b[4].strip()
         is_math = False
         
-        # Heuristic 1: Block ends with an equation number like (1), (2a), etc.
+        # detect equation by numbering (1), (2a), etc.
         if re.search(r'\(\d+[a-zA-Z]*\)$', text):
             is_math = True
-        # Heuristic 2: Short blocks containing heavy math symbols
+        # detect math symbols in short text
         elif any(sym in text for sym in math_symbols) and len(text.split()) < 20:
             is_math = True
 
         if is_math:
             bbox = fitz.Rect(b[:4])
 
-            # Pad the equation so symbols aren't cut off
             padded = fitz.Rect(
                 max(0, bbox.x0 - 15),
                 max(0, bbox.y0 - 15),
@@ -104,7 +140,7 @@ def _extract_visuals_pymupdf(doc, paper_id, page_idx, dpi=300):
                 "fig_id":      fig_id,
                 "paper_id":    paper_id,
                 "page_number": page_num,
-                "type":        "equation", # Tagged as equation!
+                "type":        "equation",
                 "image_path":  img_path,
                 "bbox":        [padded.x0, padded.y0, padded.x1, padded.y1],
                 "caption":     text,
@@ -184,14 +220,14 @@ def extract_all():
             print(f"  Error: {e}")
             continue
 
-        # 1. Extract figures and math equations
+        # Extract figures and math equations
         for page_idx in range(len(doc)):
             figs = _extract_visuals_pymupdf(doc, paper_id, page_idx)
             all_figures.extend(figs)
             if figs:
                 print(f"  page {page_idx+1}: {len(figs)} figure/math crop(s)")
 
-        # 2. Extract tables
+        # Extract tables
         tbl_crops = _extract_tables_pdfplumber(pdf_path, paper_id, doc)
         all_figures.extend(tbl_crops)
         if tbl_crops:

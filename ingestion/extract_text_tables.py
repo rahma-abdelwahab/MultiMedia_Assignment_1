@@ -19,20 +19,20 @@ os.makedirs("data", exist_ok=True)
 
 
 def _stringify_table(table: list[list[str | None]]) -> str:
-    # Simple, robust table linearization (keeps rows/cols boundaries).
+    """Convert a table (list of rows) into a clean readable text format."""
     rows = []
     for row in table:
+        # Clean -> remove None, strip spaces, replace newlines with space
         cells = [(c or "").strip().replace("\n", " ") for c in row]
-        if any(cells):
+        if any(cells):   # Skip completely empty rows
             rows.append(" | ".join(cells))
     return "\n".join(rows).strip()
 
 
 def extract_all_pdfs() -> list[dict]:
     """
-    Build a page-level text store containing:
-    - extracted page text
-    - extracted tables (linearized)
+    Extract text and tables from every page of all PDFs.
+    Saves the result as a list of page-level entries in text_metadata.json.
     """
     items: list[dict] = []
 
@@ -42,14 +42,18 @@ def extract_all_pdfs() -> list[dict]:
         try:
             with pdfplumber.open(str(pdf_path)) as pdf:
                 total_pages = len(pdf.pages)
+
+                # Go through each page
                 for i, page in enumerate(pdf.pages):
                     page_number = i + 1
                     text_parts: list[str] = []
 
+                    # Extract normal text from the page
                     page_text = (page.extract_text() or "").strip()
                     if page_text:
                         text_parts.append(page_text)
 
+                    # Extract tables from the page
                     try:
                         tables = page.extract_tables() or []
                     except Exception:
@@ -61,11 +65,14 @@ def extract_all_pdfs() -> list[dict]:
                         if s:
                             table_blocks.append(s)
 
+                    # Add tables section if any tables were found
                     if table_blocks:
                         text_parts.append("TABLES:\n" + "\n\n".join(table_blocks))
-
+                    # Combine text and tables
                     combined = "\n\n".join(text_parts).strip()
+                    # Create a unique ID for this page's text
                     text_id = f"{paper_id}_p{page_number:03d}_text"
+                    # Save page information
                     items.append(
                         {
                             "text_id": text_id,
@@ -86,5 +93,5 @@ def extract_all_pdfs() -> list[dict]:
 
 
 if __name__ == "__main__":
+    
     extract_all_pdfs()
-

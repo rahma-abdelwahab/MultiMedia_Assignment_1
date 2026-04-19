@@ -16,17 +16,19 @@ VECTOR_DIM = 128
 
 
 def build_index():
+    # creates a local vector database
     client = QdrantClient(path="data/qdrant_db")
-
+# If an old index exists → delete it .... to start fresh every time 
     if client.collection_exists(COLLECTION):
         client.delete_collection(COLLECTION)
+        # Creates a new index with the dim and distance cosine bec it measure the similarite between two embeding  
     client.create_collection(
         collection_name=COLLECTION,
         vectors_config=VectorParams(size=VECTOR_DIM, distance=Distance.COSINE),
     )
 
     embeddings = torch.load(EMBED_FILE, weights_only=False)
-
+# Load metadata and convert to maps to  look on the page id imnstade searsh on all the list 
     with open(META_FILE) as f:
         page_metadata = json.load(f)
     page_map = {m["page_id"]: m for m in page_metadata}
@@ -46,8 +48,10 @@ def build_index():
     fig_map = {m["fig_id"]: m for m in fig_metadata}
 
     points = []
+    # loopthrough all the embed 
     for idx, (item_id, emb) in enumerate(embeddings.items()):
-        mean_vec = emb.mean(dim=0).numpy().tolist()
+        # get the first vector for indexing from the vector that have multible vector 
+        first_vec = emb[0].numpy().tolist()
 
         if item_id in page_map:
             meta    = page_map[item_id]
@@ -85,8 +89,9 @@ def build_index():
                 "caption":      "",
             }
 
-        points.append(PointStruct(id=idx, vector=mean_vec, payload=payload))
-
+        # Single append at the end, to creat the qdrant point 
+        points.append(PointStruct(id=idx, vector=first_vec, payload=payload))
+# insert all the vector to can searsh on it 
     client.upsert(collection_name=COLLECTION, points=points)
     print(f"Indexed {len(points)} items into '{COLLECTION}'")
     return client

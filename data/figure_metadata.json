@@ -1,43 +1,379 @@
 [
   {
-    "fig_id": "1711.10540v2_p003_fig01",
+    "fig_id": "1711.10540v2_p002_vecfig01",
     "paper_id": "1711.10540v2",
-    "page_number": 3,
+    "page_number": 2,
     "type": "figure",
-    "image_path": "data/figure_images\\1711.10540v2_p003_fig01.jpg",
+    "image_path": "data/figure_images\\1711.10540v2_p002_vecfig01.jpg",
     "bbox": [
-      62.02400207519531,
-      625.02001953125,
-      550.1000366210938,
-      718.6959838867188
+      103.62000274658203,
+      0.0,
+      612.0,
+      260.6156311035156
+    ],
+    "caption": "Fig. 1. A general framework of machine learning techniques for protein affinity prediction."
+  },
+  {
+    "fig_id": "1711.10540v2_p002_raster02",
+    "paper_id": "1711.10540v2",
+    "page_number": 2,
+    "type": "figure",
+    "image_path": "data/figure_images\\1711.10540v2_p002_raster02.jpg",
+    "bbox": [
+      127.75,
+      52.0,
+      482.79998779296875,
+      278.75
     ],
     "caption": ""
   },
   {
-    "fig_id": "1711.10540v2_p004_fig01",
+    "fig_id": "1711.10540v2_p005_math01",
     "paper_id": "1711.10540v2",
-    "page_number": 4,
-    "type": "figure",
-    "image_path": "data/figure_images\\1711.10540v2_p004_fig01.jpg",
+    "page_number": 5,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p005_math01.jpg",
     "bbox": [
-      62.02400207519531,
-      62.0,
-      550.0999755859375,
-      125.58001708984375
+      57.02400207519531,
+      59.759971618652344,
+      156.82400512695312,
+      105.9514389038086
+    ],
+    "caption": "\ud835\udf53\ud835\udc69\ud835\udc8d\ud835\udc90\ud835\udc94\ud835\udc96\ud835\udc8e(\ud835\udc94) ="
+  },
+  {
+    "fig_id": "1711.10540v2_p005_math02",
+    "paper_id": "1711.10540v2",
+    "page_number": 5,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p005_math02.jpg",
+    "bbox": [
+      130.10000610351562,
+      56.46599578857422,
+      558.0879516601562,
+      109.9639892578125
+    ],
+    "caption": "\ud835\udfcf\n|\ud835\udc94| \u2211\n\ud835\udc69\ud835\udc8a\n|\ud835\udc94|\n\ud835\udc8a=\ud835\udfcf\n, where \ud835\udc69\ud835\udc8a is the column of the BLOSUM-62 substitution matrix (Eddy,"
+  },
+  {
+    "fig_id": "1711.10540v2_p005_math03",
+    "paper_id": "1711.10540v2",
+    "page_number": 5,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p005_math03.jpg",
+    "bbox": [
+      57.02400207519531,
+      356.69000244140625,
+      290.41400146484375,
+      402.8614501953125
+    ],
+    "caption": "dimensional feature vector \ud835\udf53\ud835\udc77\ud835\udc7a\ud835\udc7a\ud835\udc74(\ud835\udc94) ="
+  },
+  {
+    "fig_id": "1711.10540v2_p005_math04",
+    "paper_id": "1711.10540v2",
+    "page_number": 5,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p005_math04.jpg",
+    "bbox": [
+      263.80999755859375,
+      353.39599609375,
+      341.25091552734375,
+      406.8739929199219
+    ],
+    "caption": "\ud835\udfcf\n|\ud835\udc94| \u2211\n\ud835\udc6d\ud835\udc8a"
+  },
+  {
+    "fig_id": "1711.10540v2_p005_math05",
+    "paper_id": "1711.10540v2",
+    "page_number": 5,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p005_math05.jpg",
+    "bbox": [
+      283.9700012207031,
+      354.2359924316406,
+      399.5909118652344,
+      403.9414367675781
+    ],
+    "caption": "\ud835\udc94\n|\ud835\udc94|\n\ud835\udc8a=\ud835\udfcf\n, where \ud835\udc6d\ud835\udc8a"
+  },
+  {
+    "fig_id": "1711.10540v2_p006_math01",
+    "paper_id": "1711.10540v2",
+    "page_number": 6,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p006_math01.jpg",
+    "bbox": [
+      119.89999389648438,
+      247.97000122070312,
+      439.0299987792969,
+      294.1414489746094
+    ],
+    "caption": "\ud835\udc58\ud835\udc46\ud835\udc4a(\ud835\udc4e, \ud835\udc4f) = \ud835\udc5a\ud835\udc4e\ud835\udc65\ud835\udf0b\u2208\u03a0(l,r)\ud835\udc5d(\ud835\udc4e, \ud835\udc4f, \ud835\udf0b) \n(1)"
+  },
+  {
+    "fig_id": "1711.10540v2_p006_math02",
+    "paper_id": "1711.10540v2",
+    "page_number": 6,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p006_math02.jpg",
+    "bbox": [
+      129.25999450683594,
+      434.656005859375,
+      347.8700256347656,
+      490.8414611816406
+    ],
+    "caption": "\ud835\udefd(\ud835\udc4e, \ud835\udc4f) = \u2211\nexp (\ud835\udefd\ud835\udc5d(\ud835\udc4e, \ud835\udc4f, \ud835\udf0b))\n\ud835\udf0b\u2208\u03a0(a,b)"
+  },
+  {
+    "fig_id": "1711.10540v2_p006_math03",
+    "paper_id": "1711.10540v2",
+    "page_number": 6,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p006_math03.jpg",
+    "bbox": [
+      317.80999755859375,
+      432.77801513671875,
+      440.8299865722656,
+      481.5820007324219
+    ],
+    "caption": "(2)"
+  },
+  {
+    "fig_id": "1711.10540v2_p007_vecfig01",
+    "paper_id": "1711.10540v2",
+    "page_number": 7,
+    "type": "figure",
+    "image_path": "data/figure_images\\1711.10540v2_p007_vecfig01.jpg",
+    "bbox": [
+      100.0199966430664,
+      310.30560302734375,
+      612.0,
+      605.3056030273438
+    ],
+    "caption": "Fig. 2. The techniques adopted for generating feature representation of a protein complex for"
+  },
+  {
+    "fig_id": "1711.10540v2_p007_raster02",
+    "paper_id": "1711.10540v2",
+    "page_number": 7,
+    "type": "figure",
+    "image_path": "data/figure_images\\1711.10540v2_p007_raster02.jpg",
+    "bbox": [
+      191.60000610351562,
+      392.2400207519531,
+      390.8500061035156,
+      618.1400146484375
     ],
     "caption": ""
   },
   {
-    "fig_id": "1711.10540v2_p004_fig02",
+    "fig_id": "1711.10540v2_p007_math01",
     "paper_id": "1711.10540v2",
-    "page_number": 4,
-    "type": "figure",
-    "image_path": "data/figure_images\\1711.10540v2_p004_fig02.jpg",
+    "page_number": 7,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p007_math01.jpg",
     "bbox": [
-      62.02400207519531,
-      287.8900146484375,
-      550.0999755859375,
-      366.3299865722656
+      57.02400207519531,
+      164.42001342773438,
+      462.4300231933594,
+      218.44403076171875
+    ],
+    "caption": "feature representations of respective ligand and receptor as \ud835\udf4d(\ud835\udc50) = [\ud835\udf4d\ud835\udc34\ud835\udc63\ud835\udc54(\ud835\udc59)"
+  },
+  {
+    "fig_id": "1711.10540v2_p007_math02",
+    "paper_id": "1711.10540v2",
+    "page_number": 7,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p007_math02.jpg",
+    "bbox": [
+      389.95001220703125,
+      173.89999389648438,
+      555.1839599609375,
+      227.5114288330078
+    ],
+    "caption": "\ud835\udf4d\ud835\udc34\ud835\udc63\ud835\udc54(\ud835\udc5f)]. Here, \ud835\udf4d\ud835\udc34\ud835\udc63\ud835\udc54(\ud835\udc59) ="
+  },
+  {
+    "fig_id": "1711.10540v2_p007_math03",
+    "paper_id": "1711.10540v2",
+    "page_number": 7,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p007_math03.jpg",
+    "bbox": [
+      57.02400207519531,
+      197.72601318359375,
+      224.86399841308594,
+      251.2039794921875
+    ],
+    "caption": "1\n|\ud835\udc59| \u2211\n\ud835\udf53(\ud835\udc5e)\n\ud835\udc5e\u2208\ud835\udc59\n and \ud835\udf4d\ud835\udc34\ud835\udc63\ud835\udc54(\ud835\udc5f) ="
+  },
+  {
+    "fig_id": "1711.10540v2_p007_math04",
+    "paper_id": "1711.10540v2",
+    "page_number": 7,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p007_math04.jpg",
+    "bbox": [
+      198.2899932861328,
+      197.72601318359375,
+      557.9661254882812,
+      251.2039794921875
+    ],
+    "caption": "1\n|\ud835\udc5f| \u2211\n\ud835\udf53(\ud835\udc5e)\n\ud835\udc5e\u2208\ud835\udc5f\n are the explicit feature representations averaged across"
+  },
+  {
+    "fig_id": "1711.10540v2_p007_math05",
+    "paper_id": "1711.10540v2",
+    "page_number": 7,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p007_math05.jpg",
+    "bbox": [
+      166.10000610351562,
+      341.0360107421875,
+      558.0340576171875,
+      394.5140075683594
+    ],
+    "caption": "1\n|\ud835\udc50|\u00d7|\ud835\udc50\u2032| \u2211\n\ud835\udc58(\ud835\udc5e, \ud835\udc5e\u2032)\n\ud835\udc5e\u2208\ud835\udc50,\ud835\udc5e\u2032\u2208\ud835\udc50\u2032\u2032\n, where \ud835\udc58(\ud835\udc5e, \ud835\udc5e\u2032) is the chain level kernel over two"
+  },
+  {
+    "fig_id": "1711.10540v2_p008_math01",
+    "paper_id": "1711.10540v2",
+    "page_number": 8,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p008_math01.jpg",
+    "bbox": [
+      197.3300018310547,
+      400.3699951171875,
+      316.0005187988281,
+      461.614013671875
+    ],
+    "caption": "1\n2 \u2016\ud835\udc98\u20162 + C \u2211(\ud835\udf09\ud835\udc56"
+  },
+  {
+    "fig_id": "1711.10540v2_p008_math02",
+    "paper_id": "1711.10540v2",
+    "page_number": 8,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p008_math02.jpg",
+    "bbox": [
+      257.3299865722656,
+      428.1759948730469,
+      301.8630676269531,
+      468.16143798828125
+    ],
+    "caption": "\ud835\udc56=1"
+  },
+  {
+    "fig_id": "1711.10540v2_p008_math03",
+    "paper_id": "1711.10540v2",
+    "page_number": 8,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p008_math03.jpg",
+    "bbox": [
+      271.9700012207031,
+      435.9100036621094,
+      397.260498046875,
+      482.56146240234375
+    ],
+    "caption": "\ud835\udc66\ud835\udc56\u2212\ud835\udc53(\ud835\udc84\ud835\udc56) \u2264\ud835\udf00+ \ud835\udf09\ud835\udc56"
+  },
+  {
+    "fig_id": "1711.10540v2_p008_math04",
+    "paper_id": "1711.10540v2",
+    "page_number": 8,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p008_math04.jpg",
+    "bbox": [
+      271.9700012207031,
+      451.75,
+      397.260498046875,
+      498.4014587402344
+    ],
+    "caption": "\ud835\udc53(\ud835\udc84\ud835\udc56) \u2212\ud835\udc66\ud835\udc56\u2264\ud835\udf00+ \ud835\udf09\ud835\udc56"
+  },
+  {
+    "fig_id": "1711.10540v2_p008_math05",
+    "paper_id": "1711.10540v2",
+    "page_number": 8,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p008_math05.jpg",
+    "bbox": [
+      319.3699951171875,
+      467.1759948730469,
+      378.3580017089844,
+      512.7340087890625
+    ],
+    "caption": "\u2212\u22650"
+  },
+  {
+    "fig_id": "1711.10540v2_p008_math06",
+    "paper_id": "1711.10540v2",
+    "page_number": 8,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p008_math06.jpg",
+    "bbox": [
+      371.95001220703125,
+      453.1780090332031,
+      443.95001220703125,
+      496.5820007324219
+    ],
+    "caption": "(3)"
+  },
+  {
+    "fig_id": "1711.10540v2_p009_math01",
+    "paper_id": "1711.10540v2",
+    "page_number": 9,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p009_math01.jpg",
+    "bbox": [
+      57.02400207519531,
+      343.010009765625,
+      141.73999786376953,
+      387.1940002441406
+    ],
+    "caption": "RMSE = \u221a"
+  },
+  {
+    "fig_id": "1711.10540v2_p009_math02",
+    "paper_id": "1711.10540v2",
+    "page_number": 9,
+    "type": "equation",
+    "image_path": "data/figure_images\\1711.10540v2_p009_math02.jpg",
+    "bbox": [
+      111.73999786376953,
+      341.9960021972656,
+      557.9979858398438,
+      392.42144775390625
+    ],
+    "caption": "\ud835\udc5b\u2211\n(\ud835\udc66\ud835\udc56\u2212\ud835\udc53(\ud835\udc50\ud835\udc56))2\n\ud835\udc41\n\ud835\udc56=1\n and Pearson correlation coefficient (\ud835\udc43\ud835\udc5f) between the predicted"
+  },
+  {
+    "fig_id": "1711.10540v2_p010_vecfig01",
+    "paper_id": "1711.10540v2",
+    "page_number": 10,
+    "type": "figure",
+    "image_path": "data/figure_images\\1711.10540v2_p010_vecfig01.jpg",
+    "bbox": [
+      86.33999633789062,
+      0.0,
+      612.0,
+      249.45565795898438
+    ],
+    "caption": "Fig. 3. Cumulative histogram of absolute error between actual and predicted binding affinity values"
+  },
+  {
+    "fig_id": "1711.10540v2_p010_raster02",
+    "paper_id": "1711.10540v2",
+    "page_number": 10,
+    "type": "figure",
+    "image_path": "data/figure_images\\1711.10540v2_p010_raster02.jpg",
+    "bbox": [
+      120.57000732421875,
+      58.74998474121094,
+      475.32000732421875,
+      262.47998046875
     ],
     "caption": ""
   },

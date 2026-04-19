@@ -1,91 +1,79 @@
 import arxiv
 import os
+import ssl
 import time
 import json
+import urllib.request
+import shutil
 
 # ====================== CONFIGURATION ======================
 
-# Directory where downloaded PDF files will be saved
+# Folder to save the downloaded PDFs
 SAVE_DIR = "data/pdfs"
-
-# Create the directory if it doesn't exist (no error if it already exists)
+# Create folder if it doesn't exist
 os.makedirs(SAVE_DIR, exist_ok=True)
 
-# List of search topics
-# Format: ("category_name", "arxiv_search_query")
+# List of topics to search for
 QUERIES = [
     (
         "drug_discovery",
         "cat:q-bio.BM protein structure drug target binding affinity"
     ),
-    # Example of another topic (currently disabled):
-    # (
-    #     "clinical_outcomes",
-    #     "cat:q-bio.QM clinical trial treatment effect mortality survival"
-    # ),
 ]
 
-# How many papers to download per topic
+# Number of papers to download for each topic
 PAPERS_PER_TOPIC = 1
+
+# ====================== SSL FIX ======================
+# Fix for SSL certificate errors 
+SSL_CTX = ssl._create_unverified_context()
+
+
+def _download_pdf_ssl(url: str, out_path: str) -> None:
+    """Download PDF using SSL bypass."""
+    with urllib.request.urlopen(url, context=SSL_CTX) as resp, \
+         open(out_path, "wb") as f:
+        shutil.copyfileobj(resp, f)
 
 # ===========================================================
 
 def download_papers(max_per_query=10):
-    """
-    Downloads research papers from arXiv based on the defined queries.
-    
-    Args:
-        max_per_query (int): Maximum number of search results to fetch per query.
-                            Default is 10.
-    
-    The function:
-    - Searches arXiv for each topic
-    - Downloads PDFs (skips if already downloaded)
-    - Saves metadata in a JSON file for easy tracking
-    - Prints a summary table at the end
-    """
-    
-    # Initialize arXiv client
-    client = arxiv.Client()
-    
-    # Set to track already processed paper IDs (to avoid duplicates)
-    seen = set()
-    
-    # Dictionary to store metadata for all downloaded papers
-    mapping = {}
+    """Main function to download papers from arXiv."""
 
-    # Loop through each topic/category
+    client = arxiv.Client()
+    seen = set()           # Track papers we already downloaded
+    mapping = {}           # Store info about each paper
+
+    # Go through each search topic
     for category, query in QUERIES:
         print(f"\n🔍 Searching [{category}]: {query}")
-        
-        # Create search object
+
         search = arxiv.Search(
             query=query,
             max_results=max_per_query,
-            sort_by=arxiv.SortCriterion.Relevance,   # Sort by most relevant first
+            sort_by=arxiv.SortCriterion.Relevance,
         )
 
         downloaded_this_topic = 0
 
-        # Iterate over search results
+        # Process each paper from the search
         for paper in client.results(search):
-            
-            # Stop if we reached the desired number of papers for this topic
+            # Stop when we have enough papers for this topic
             if downloaded_this_topic >= PAPERS_PER_TOPIC:
                 break
 
-            # Extract paper ID (e.g., 2504.12345)
+            # Get the paper ID
             pid = paper.entry_id.split("/")[-1]
 
-            # Skip if we already downloaded this paper
+            # Skip if we already have this paper
             if pid in seen:
                 continue
             seen.add(pid)
 
-            # Define output path for the PDF
+            # Path where the PDF will be saved
             out_path = os.path.join(SAVE_DIR, f"{pid}.pdf")
 
-            # Store paper metadata in mapping dictionary
+            # Save paper information
             mapping[pid] = {
                 "category": category,
                 "query": query,
@@ -93,49 +81,48 @@ def download_papers(max_per_query=10):
                 "filename": f"{pid}.pdf",
             }
 
-            # Check if file already exists
+            # If file already exists, skip downloading
             if os.path.exists(out_path):
-                print(f"  ✅ Already have {pid} — {paper.title[:60]}...")
+                print(f" ✅ Already have {pid} — {paper.title[:60]}...")
                 downloaded_this_topic += 1
                 continue
 
-            # Download the paper
+            # Try to download the paper
             try:
+                # Normal download using arxiv library
                 paper.download_pdf(dirpath=SAVE_DIR, filename=f"{pid}.pdf")
-                print(f"  📥 [{downloaded_this_topic + 1}/{PAPERS_PER_TOPIC}] Downloaded {pid}: {paper.title[:60]}...")
+                print(f" 📥 [{downloaded_this_topic + 1}/{PAPERS_PER_TOPIC}] Downloaded {pid}: {paper.title[:60]}...")
                 downloaded_this_topic += 1
-                
-                # Be respectful to arXiv servers - add small delay
-                time.sleep(1)
-                
-            except Exception as e:
-                print(f"  ❌ Failed to download {pid}: {e}")
+                time.sleep(1)          # Wait a bit to be nice to arXiv
 
-        print(f"  → {downloaded_this_topic} paper(s) collected for [{category}]")
+            except Exception:
+                # If normal download fails, try direct download with SSL fix
+                try:
+                    pdf_url = f"https://arxiv.org/pdf/{pid}"
+                    _download_pdf_ssl(pdf_url, out_path)
+                    print(f" 📥 [{downloaded_this_topic + 1}/{PAPERS_PER_TOPIC}] Downloaded {pid} (SSL bypass): {paper.title[:60]}...")
+                    downloaded_this_topic += 1
+                    time.sleep(1)
+                except Exception as e2:
+                    print(f" ❌ Failed to download {pid}: {e2}")
 
-    # ====================== SAVE METADATA ======================
-    
-    # Save mapping to JSON file (very useful for later processing)
+        print(f" → {downloaded_this_topic} paper(s) collected for [{category}]")
+
+    # Save all paper information to a JSON file
     map_path = os.path.join(SAVE_DIR, "category_map.json")
     with open(map_path, "w", encoding="utf-8") as f:
         json.dump(mapping, f, indent=2, ensure_ascii=False)
-    
     print(f"\n💾 Saved mapping → {map_path}")
 
-    # ====================== PRINT SUMMARY TABLE ======================
-    
+    # Show summary table
     print(f"\n{'PDF ID':<25} {'Category':<22} {'Title'}")
     print("-" * 85)
-    
     for pid, info in mapping.items():
         print(f"{pid:<25} {info['category']:<22} {info['title'][:50]}...")
 
     print(f"\n✅ Done! Total papers downloaded: {len(mapping)}")
     print(f"📁 All files saved in: {SAVE_DIR}/")
 
-
-# ====================== RUN THE SCRIPT ======================
-
 if __name__ == "__main__":
-    # You can change the number of results to search here if needed
+    # Run the program
     download_papers(max_per_query=15)
